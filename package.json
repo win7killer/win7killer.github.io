@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/win7killer/win7killer.github.io/issues"
   },
-  "homepage": "https://github.com/win7killer/win7killer.github.io#readme"
+  "homepage": "https://github.com/win7killer/win7killer.github.io#readme",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.2"
+  }
 }
