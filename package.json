@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/win7killer/win7killer.github.io#readme",
   "dependencies": {
-    "cheerio": "^1.0.0-rc.2"
+    "cheerio": "^1.0.0-rc.2",
+    "jquery": "^3.3.1"
   }
 }
