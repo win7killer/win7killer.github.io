@@ -2,7 +2,7 @@
 
 > webpack2 还没研究好，就发现升级到4了，你咋这么快~
 
-最近要做项目脚手架，项目构建准备重新做，因为之前写的太烂了~~~然后发现webpack大版本已经升到4了(又去看了一眼，4.5了)，这么快的节奏，不适应啊~ 既然是新的，就用新的来吧，先跳过version3
+最近要做项目脚手架，项目构建准备重新做，因为之前写的太烂了...然后发现webpack大版本已经升到4了(又去看了一眼，4.5了)，这么快的节奏，不适应啊...既然是新的，就用新的来吧，先跳过version3
 
 webpack4 相对于之前的版本，有不少变化，其中包括一些不向下兼容的变化。具体哪些变化这里就不啰嗦了（[4.0 changelog](https://github.com/webpack/webpack/releases/tag/v4.0.0)， [译文](https://zhuanlan.zhihu.com/p/34028750)），今天主要记录一下 废除 ```commonChunksPlugin``` 之后，怎么使用 ```splitChunksPlugin``` && ```runtimeChunkPlugin```
 > 只记录到自己了解到的部分，不定期更新吧
