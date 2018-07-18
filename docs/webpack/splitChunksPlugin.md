@@ -75,7 +75,9 @@ webpackConf: {
         splitChunks: {
             chunks: 'initial', // 只对入口文件处理
             cacheGroups: {
-                vendor: { // split `node_modules`目录下被打包的代码到 `page/vendor.js && .css` 没找到可打包文件的话，则没有。css需要依赖 `ExtractTextPlugin`
+                vendor: {
+                    // split `node_modules`目录下被打包的代码到 `page/vendor.js && .css`
+                    // 没找到可打包文件的话，则没有。css需要依赖 `ExtractTextPlugin`
                     test: /node_modules\//,
                     name: 'page/vendor',
                     priority: 10,

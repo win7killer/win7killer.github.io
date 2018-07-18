@@ -4,13 +4,17 @@
     <ul class="article-list no-style-list">
         <li class="item" v-for="(item, index) in docMap.list" :key="index">
             <div>
-                <h3 class="article-title">{{item.title}}</h3>
+                <h3 class="article-title">
+                    <a :href="'/' + item.name">
+                        {{item.title}}
+                    </a>
+                </h3>
                 <p class="article-info">
                     <span class="author">作者：{{item.author}}</span>
                     <span class="create-time">发布时间：{{item.create_time|time('Y-M-D H:M')}}</span>
                     <span class="update-time">更新时间：{{item.update_time|time('Y-M-D H:M')}}</span>
                 </p>
-                <p>{{item.summary}}</p>
+                <p><a :href="'/' + item.name">{{item.summary}}</a></p>
             </div>
         </li>
     </ul>

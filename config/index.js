@@ -48,9 +48,9 @@ module.exports = {
         index: path.resolve(__dirname, '../index.html'),
 
         // Paths
-        assetsRoot: path.resolve(__dirname, '../docs'),
+        assetsRoot: path.resolve(__dirname, '../dist'),
         assetsSubDirectory: 'static',
-        assetsPublicPath: 'https://win7killer.github.io/docs',
+        assetsPublicPath: '/dist',
 
         /**
          * Source Maps
@@ -58,7 +58,7 @@ module.exports = {
 
         productionSourceMap: true,
         // https://webpack.js.org/configuration/devtool/#production
-        devtool: '#source-map',
+        devtool: false,
 
         // Gzip off by default as many popular static hosts such as
         // Surge or Netlify already gzip all static assets for you.
