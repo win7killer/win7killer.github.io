@@ -14,9 +14,9 @@ let maxNum = 5;
 
 let totalNum = 1;
 let totalStr = '';
-let fileNum = 1;
+// let fileNum = 1;
 
-function loopReq(pn = 1) {
+function loopReq (pn = 1) {
     if (pn > maxNum) {
         console.log(`\n\n--------- done ---------\n\n`);
         return;
@@ -29,7 +29,7 @@ function loopReq(pn = 1) {
             content += d;
         });
         res.on('end', () => {
-            console.log(`pn${pn}, end`)
+            console.log(`pn${pn}, end`);
             reqEndFn(content);
         });
     }).on('error', (e) => {
@@ -38,19 +38,20 @@ function loopReq(pn = 1) {
     req.end();
 }
 
-function getTotalPn($dom) {
+function getTotalPn ($dom) {
     totalNum = $dom.find('#thread_theme_7 .l_reply_num .red').eq(1).text();
     console.log(`总页数${totalNum}`);
 }
 
-function reqEndFn(content) {
+function reqEndFn (content) {
     let $dom = $(content);
     let cStr = '';
-    if (pgNum == 1) {
+    if (pgNum === 1) {
         totalNum = getTotalPn($dom);
     }
     $dom.find('.j_d_post_content').each((index, text) => {
-        cStr += $.load(text, {
+        cStr += $.load(text,
+            {
                 normalizeWhitespace: true,
                 decodeEntities: false,
                 xmlMode: true
@@ -58,16 +59,16 @@ function reqEndFn(content) {
             .html()
             // .text()
             .replace(/<br\/?>/gi, '\n')
-            .replace(/<(a|div|span)[^\<\>]*>/gi, '')
+            .replace(/<(a|div|span)[^<>]*>/gi, '')
             .replace(/<\/(a|div|span)>/gi, '')
-            .replace(/\”\“/gi, '”\n    “')
+            .replace(/”“/gi, '”\n    “')
             .replace(/\s{5,12}/g, '\n    ')
             .replace(/\n([^\s])/g, '\n    $1');
         cStr += '\n';
     });
     totalStr += cStr;
 
-    if (pgNum == maxNum) {
+    if (pgNum === maxNum) {
         writeFile(totalStr, () => {
             totalStr = '';
             loopReq(++pgNum);
@@ -77,25 +78,25 @@ function reqEndFn(content) {
     }
 }
 
-function writeFile(con, fbn = function() {}) {
+function writeFile (con, fbn = function () {}) {
     let num = Math.floor(pgNum / 5);
     // let num = 7;
     fs.open(`./note_${num}.txt`, 'a+', (err, fd) => {
         if (err) {
-            throw new Error('open file error, ${err}');
+            throw new Error(`open file error, ${err}`);
         } else {
             fs.write(fd, con, 'utf-8', (err, written, string) => {
                 if (err) {
-                    throw new Error('open file error, ${err}');
+                    throw new Error(`open file error, ${err}`);
                 }
                 fs.close(fd);
                 fbn();
             });
         }
-    })
+    });
 }
 
-function init() {
+function init () {
     loopReq(pgNum);
 }
 

@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <meta author="win7killer@163.com"/>
+    <style>
+
+
+
+    .pager-box {
+        margin: 20px auto;
+        font-size: 12;
+    }
+
+    .pager-innerBox {
+        text-align: center;
+        border: 1px solid #666;
+        border-right: none;
+        display: inline-block;
+    }
+
+    .item {
+        font-size: 12px;
+        /*margin: 5px;*/
+        color: #333;
+        height: 30px;
+        line-height: 30px;
+        padding: 0 4px;
+        text-align: center;
+        border-right: 1px solid #666;
+        display: inline-block;
+        text-decoration: none;
+        cursor: default;
+    }
+
+    .numTag {
+        padding: 0;
+        width: 30px;
+    }
+
+    .enItem:hover {
+        background: #f90;
+        color: #fff;
+        cursor: pointer;
+    }
+
+    .disItem {
+        background: #eee;
+        color: #999;
+    }
+
+    .disItem:hover {
+        cursor: default;
+    }
+
+    .curent {
+        background: #f90;
+    }
+    </style>
+</head>
+
+<body>
+    <script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
+    <div class="pager-box">
+    </div>
+    <script>
+    function Pager(option) {
+        this.init(option);
+        this.drawHtml();
+        this.bind();
+    }
+    Pager.prototype.init = function(option) {
+        if (typeof option !== 'object' || option.constructor !== Object) {
+            throw new Error('params is not ok');
+        }
+        var that = this;
+        this.op = $.extend(true, {}, {
+            wrapper: '.pager_wrapper',
+            count: 0,
+            limit: 5,
+            offset: 0,
+            curPage: 1,
+            clickCallBack: function(target, tPage, curPage) {
+                var wls = window.location.search;
+                var data = query2json(wls);
+                data.offset = (parseInt(tPage, 10) - 1) * this.limit;
+                data.limit = data.limit || this.limit;
+                window.location.search = json2query(data);
+            }
+        }, option);
+        console.log(this.op);
+        var pageCount = Math.ceil(this.op.count / this.op.limit);
+        this.op.pageCount = pageCount || 1;
+    };
+    Pager.prototype.delwithNum = function() {
+        var pagerData = {
+            prev: this.op.curPage - 1 > 0 ? this.op.curPage - 1 : 1,
+            next: this.op.curPage + 1 > this.op.pageCount ? this.op.pageCount : this.op.curPage + 1,
+            start: 1,
+            end: this.op.pageCount
+        };
+        return pagerData;
+    };
+    Pager.prototype.build = function() {
+        var pagerData = this.delwithNum();
+        var op = this.op;
+        var htmlCfg = {
+            prev: '上一页',
+            next: '下一页',
+            start: '首页',
+            end: '尾页',
+            dot: op.pageCount > 5 ? '...' : ''
+        };
+        var str = [];
+        var numEnTag = ['<a href="javascript:;" class="item enItem numTag" tPage="', '</a>'];
+        var enTag = ['<a href="javascript:;" class="item enItem" tPage="', '</a>'];
+        var disTag = ['<a href="javascript:;" class="item disItem">', '</a>'];
+        var curTag = ['<a href="javascript:;" class="item numTag curent">', '</a>'];
+        var dotTag = ['<a href="javascript:;" class="item numTag dotTag">', '</a>'];
+        var beforeDot = '';
+        var afterDot = '';
+        // 首页、上一页
+        if (op.curPage === 1) {
+            str.push(disTag[0] + htmlCfg.start + disTag[1]);
+            str.push(disTag[0] + htmlCfg.prev + disTag[1]);
+        } else {
+            str.push(enTag[0] + pagerData.start + '">' + htmlCfg.start + enTag[1]);
+            str.push(enTag[0] + pagerData.prev + '">' + htmlCfg.prev + enTag[1]);
+        }
+        if (op.curPage - 1 > 2) { // 是否有前 '...''
+            beforeDot = dotTag[0] + htmlCfg.dot + dotTag[1];
+        }
+        if (op.pageCount - op.curPage > 2) { // 是否有后'...'
+            afterDot = dotTag[0] + htmlCfg.dot + dotTag[1];
+        }
+        // 前...
+        str.push(beforeDot);
+        for (var i = 1, l = op.pageCount; i <= l; i++) {
+            if (op.curPage - 1 < 2) {
+                if (i === op.curPage) {
+                    str.push(curTag[0] + i + curTag[1]);
+                } else if (i - 1 < 5) {
+                    str.push(numEnTag[0] + i + '">' + i + numEnTag[1]);
+                }
+            } else if (op.pageCount - op.curPage < 2) {
+                if (i === op.curPage) {
+                    str.push(curTag[0] + i + curTag[1]);
+                } else if (op.pageCount - i < 5) {
+                    str.push(numEnTag[0] + i + '">' + i + numEnTag[1]);
+                }
+            } else {
+                if (Math.abs(i - op.curPage) <= 2) {
+                    if (i === op.curPage) {
+                        str.push(curTag[0] + i + curTag[1]);
+                    } else {
+                        str.push(numEnTag[0] + i + '">' + i + numEnTag[1]);
+                    }
+                }
+            }
+        }
+        // 后...
+        str.push(afterDot);
+        // 尾页、下一页
+        if (op.curPage === op.pageCount) {
+            str.push(disTag[0] + htmlCfg.next + disTag[1]);
+            str.push(disTag[0] + htmlCfg.end + disTag[1]);
+        } else {
+            str.push(enTag[0] + pagerData.next + '">' + htmlCfg.next + enTag[1]);
+            str.push(enTag[0] + pagerData.end + '">' + htmlCfg.end + enTag[1]);
+        }
+        return '<div class="pager-innerBox">' + str.join('') + '</div>';
+    };
+    Pager.prototype.drawHtml = function() {
+        var str = this.build() || '';
+        $(this.op.wrapper).html(str);
+    };
+    Pager.prototype.bind = function() {
+        var that = this;
+        $(this.op.wrapper).on('click', '.enItem', function() {
+            var tPage = parseInt($(this).attr('tPage'), 10) || 1;
+            (function(me) {
+                that.op.clickCallBack && that.op.clickCallBack.constructor === Function &&
+                    that.op.clickCallBack(me, tPage, that.op.curent);
+            })(this);
+        });
+    }
+    Pager.prototype.reDrawHtml = function(tPage) {
+        this.op.curPage = tPage;
+        this.drawHtml();
+    };
+    function query2json(str) {
+        var oData = {};
+        if (!str) {
+            return {};
+        }
+        var arr = str.replace('?', '').split('&');
+        for (var i = 0, l = arr.length; i < l; i++) {
+            var aTemp = arr[i].split('=');
+            oData[aTemp[0]] = aTemp[1];
+        }
+        return oData;
+    }
+    function json2query(data) {
+        var arr = [];
+        for (var i in data) {
+            arr.push(i + '=' + data[i]);
+        }
+        return arr.join('&');
+    }
+    /****************** demo *********************/
+    var params = query2json(window.location.search);
+    /*new Pager({
+        wrapper: '.pager-box',
+        count: 200,
+        limit: parseInt(params.limit, 10) || 10,
+        offset: parseInt(params.offset, 10) || 1,
+        curPage: parseInt(params.offset, 10) / parseInt(params.limit, 10) + 1 || 1
+    });*/
+    var myPager = new Pager({
+        wrapper: '.pager-box',
+        count: 200,
+        limit: parseInt(params.limit, 10) || 10,
+        offset: parseInt(params.offset, 10) || 1,
+        curPage: parseInt(params.offset, 10) / parseInt(params.limit, 10) + 1 || 1,
+        clickCallBack: function(obj, tPage, curPage) {
+            myPager.reDrawHtml(tPage);
+        }
+    });
+    var template = '';
+    </script>
+    <div class="ttbox" jTemp-id="test" style="display: none;">
+        <{$data.index}/>
+        <br>
+        <{$data.url}/>
+        <br>
+        <{$data.html}/>
+        <p>hello
+            <{$data.text}/> ss:
+            <{$pp}/>
+        </p>
+        <{$data.data.cc}/>
+        <{$data.data.arr_1[1]}/>
+        <{$data['cxz']}/>
+    </div>
+    <script>
+    var left = '<{';
+    var right = '}/>';
+    var showTag = ':' && '';
+    var jTid = 'test';
+    var sTemplate = $('div[jTemp-id="' + jTid + '"]').html();
+    console.log(sTemplate);
+    var data = {
+        index: 1,
+        url: 'http://xx.xx',
+        html: '<a href="javascript:;">1</a>',
+        text: 'world',
+        data: {
+            cc: 'xxx',
+            arr_1: [1, 2, 3]
+        },
+        cxz: 'xxxxx'
+    }
+    $('body').append(buildTemplateHtml(sTemplate, {
+        data: data
+    }));
+    function buildTemplateHtml(sTpl, oData) {
+        oData = oData || {};
+        sTpl = sTpl || '';
+        // 注释的正则匹配
+        var exTagReg = /(\{|\}|\/|\%|\-|\!|\*)/gi;
+        var exNoteL = (left + '*').replace(exTagReg, '\\' + '$1').replace('<', '\\&lt\\;');
+        var exNoteR = ('*' + right).replace(exTagReg, '\\' + '$1').replace('>', '\\&gt\\;');
+        var exNoteReg = Function('return /' + exNoteL + '(.*)' + exNoteR + '/g')();
+        // 变量输出正则
+        var tagReg = /(\{|\}|\/|\%|\-|\!)/gi;
+        var leftTagReg = left.replace(tagReg, '\\' + '$1').replace('<', '\\&lt\\;');
+        var rightTagRge = right.replace(tagReg, '\\' + '$1').replace('>', '\\&gt\\;');
+        var vReg = (showTag ? '\\' + showTag : '') + '\\$([a-zA-Z]+[0-9a-zA-Z\\.\\-\\_\\[\\]\'\"]*)';
+        var reg = Function('return /' + leftTagReg + vReg + rightTagRge + '/g')();
+        // 先去掉注释
+        var html = sTpl.replace(exNoteReg, '');
+        // 变量输出
+        html = html.replace(reg, function(str, $1) {
+            return Function('par', 'console.log(par.' + $1 + '); return par.' + $1 + ' || "";')(oData);
+        });
+        // 返回渲染后的html
+        return html;
+    }
+    </script>
+</body>
+
+</html>

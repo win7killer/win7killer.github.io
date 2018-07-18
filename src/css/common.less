@@ -1,0 +1,74 @@
+@import "./reset.css";
+@import "./vars.less";
+@import "./mixin.less";
+@import "./theme.less";
+
+body {
+    font-size: .14rem;
+    background-color: @theme-bg-color;
+}
+
+input,
+button {
+    border: 1px solid #999;
+}
+
+.header {
+    background-color: @theme-bg-color;
+}
+.footer {
+    color: @theme-text-color;
+    background: @theme-bg-color;
+    text-align: center;
+    border-top: solid 1px #e6e6e6;
+    padding: .2rem 0;
+    box-sizing: border-box;
+    .layout {
+        box-sizing: border-box;
+    }
+}
+.layout {
+    .layout();
+    min-width: 800px;
+    max-width: 1200px;
+    // width: 1400px;
+
+    // color: #333;
+}
+.clearfix {
+    .clearfix();
+}
+
+// float
+.pull-left {
+    float: left;
+}
+
+.pull-right {
+    float: right;
+}
+
+// text-align
+.text-left {
+    text-align: left;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-justify {
+    text-align: justify;
+}
+
+.no-style-list {
+    margin: 0;
+    padding: 0;
+    li {
+        list-style: none;;
+    }
+}
