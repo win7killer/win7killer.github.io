@@ -1,9 +1,15 @@
 <template>
-<div id="app">
+<div id="app" :class="['app', `app-${$route.name.toLowerCase()}`]">
     <Header bgColor="#333">
-        <Nav bgColor="#333" ></Nav>
+        <Nav bgColor="#333" :routerName="routerName"></Nav>
     </Header>
-    <router-view :cHeight="appHeight"/>
+    <div class="layout" :style="{
+        height: $route.name === 'Main' ? `${appLayoutHeight}` : 'auto'
+    }">
+        <router-view/>
+    </div>
+    <Footer></Footer>
+
 </div>
 </template>
 
@@ -15,8 +21,8 @@ export default {
     name: 'App',
     data() {
         return {
-            cWidth: document.body.clientWidth,
-            cHeight: document.body.clientHeight,
+            cWidth: window.innerWidth,
+            cHeight: window.innerHeight,
         };
     },
     computed: {
@@ -26,13 +32,16 @@ export default {
         navWidth() {
             return this.cWidth >= 1000 ? this.cWidth : 1000;
         },
-        appHeight() {
-            return this.cHeight;
+        routerName() {
+            return this.$route.name;
+        },
+        appLayoutHeight() {
+            console.log(this.cHeight);
+            return `${this.cHeight - 57 - 61}px`;
         }
     },
     mounted() {
-        this.cWidth = document.body.clientWidth;
-        window.hljs.initHighlightingOnLoad();
+        this.cWidth = document.body.innerWidth;
         this.bindEvn();
     },
     components: {
@@ -42,16 +51,15 @@ export default {
     methods: {
         bindEvn() {
             window.addEventListener('resize', (e) => {
-                this.cWidth = document.body.clientWidth;
-                this.cHeight = document.body.clientHeight;
+                this.cHeight = window.innerHeight >= 600 ? window.innerHeight : 600;
             })
         }
     },
 };
 </script>
 
-<style>
-#app {
+<style lang="less">
+.app {
     font-family: sans-serif, 'Segoe UI', Tahoma, Geneva, Verdana, ;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -59,5 +67,12 @@ export default {
     color: #333;
     background: #fcfcfc;
 }
+.app-main {
 
+}
+.app-article {
+    &>.layout {
+        min-height: 800px;
+    }
+}
 </style>

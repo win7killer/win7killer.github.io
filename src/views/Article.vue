@@ -1,9 +1,6 @@
 <template>
 <div class="article">
-    <div class="layout">
-        <ArticleList></ArticleList>
-    </div>
-    <Footer></Footer>
+    <ArticleList></ArticleList>
 </div>
 </template>
 

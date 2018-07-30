@@ -1,18 +1,16 @@
 <template>
 <div id="main" class="main">
-    <div class="layout">
-        <h1>FE_Bean's show
-            <p class="desc text-right">-- Just a little FE...</p>
-        </h1>
 
-        <ul class="info no-style-list">
-            <li class="field" v-for="(item, index) in infoList" :key="index">
-                <span class="title text-right">{{item.title}}:</span>
-                <span class="value">{{item.value}}</span>
-            </li>
-        </ul>
-    </div>
-    <Footer></Footer>
+    <h1>FE_Bean's show
+        <p class="desc text-right">-- Just a little FE...</p>
+    </h1>
+
+    <ul class="info no-style-list">
+        <li class="field" v-for="(item, index) in infoList" :key="index">
+            <span class="title text-right">{{item.title}}:</span>
+            <span class="value">{{item.value}}</span>
+        </li>
+    </ul>
 </div>
 </template>
 
@@ -87,7 +85,8 @@ export default {
     .layout {
         width: 800px;
         margin: 0 auto;
-        height: 800px;
+        height: 100%;
+        // height: 500px;
     }
 }
 

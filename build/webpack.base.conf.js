@@ -3,8 +3,6 @@ const path = require('path');
 const utils = require('./utils');
 const config = require('../config');
 const vueLoaderConfig = require('./vue-loader.conf');
-const marked = require("marked");
-const renderer = new marked.Renderer();
 function resolve (dir) {
     return path.join(__dirname, '..', dir);
 }
@@ -47,21 +45,6 @@ module.exports = {
                 test: /\.vue$/,
                 loader: 'vue-loader',
                 options: vueLoaderConfig
-            },
-            {
-                test: /\.md$/,
-                use: [
-                    'html-loader',
-                    'highlight-loader',
-                    {
-                        loader: 'markdown-loader',
-                        options: {
-                            /* your options here */
-                            pedantic: true,
-                            renderer
-                        }
-                    }
-                ]
             },
             {
                 test: /\.js$/,

@@ -24,6 +24,9 @@ export default {
                 title: '文章',
                 link: '/article',
             }, {
+                title: 'VUE_DEMO',
+                link: '/vue_demo/HelloWorld',
+            }, {
                 title: '博客园',
                 isOut: true,
                 link: 'http://www.cnblogs.com/ufex/'

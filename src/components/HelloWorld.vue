@@ -1,6 +1,6 @@
 <template>
     <div class="hello">
-
+        {{msg}}
     </div>
 </template>
 
@@ -9,7 +9,7 @@ export default {
     name: 'HelloWorld',
     data() {
         return {
-            msg: 'Welcome to Your Vue.js App'
+            msg: '欢迎查看 Vue Demo，选择左侧你要查看的Demo'
         }
     }
 }

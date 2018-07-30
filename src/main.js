@@ -6,13 +6,10 @@ import router from './router';
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import '@/css/common.less';
-import VueSimpleMarkdown from 'vue-simple-markdown';
 // You need a specific loader for CSS files like https://github.com/webpack/css-loader
-import 'vue-simple-markdown/dist/vue-simple-markdown.css';
 import initFilter from '@/filter';
 import Footer from '@/modules/common/Footer';
 Vue.use(ElementUI);
-Vue.use(VueSimpleMarkdown);
 Vue.component('Footer', Footer);
 // Vue.use(Footer, 'Footer');
 Vue.config.productionTip = false;
