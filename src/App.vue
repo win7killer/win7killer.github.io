@@ -52,7 +52,7 @@ export default {
         bindEvn() {
             window.addEventListener('resize', (e) => {
                 this.cHeight = window.innerHeight >= 600 ? window.innerHeight : 600;
-            })
+            });
         }
     },
 };
@@ -73,6 +73,12 @@ export default {
 .app-article {
     &>.layout {
         min-height: 800px;
+    }
+}
+.app-vuedemo {
+    &>.layout {
+        width: auto;
+        margin: 20px 100px;
     }
 }
 </style>

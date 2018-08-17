@@ -103,7 +103,6 @@ export default {
                 this.rgbArr = this.rgbaArr.slice(0, 3);
                 this.afterPicked();
             }
-
         },
         rgbToHex(rgb = 'rgb(255, 0, 0)') {
             rgb = rgb.replace(/rgb\(/, '').replace(/\)/, '');

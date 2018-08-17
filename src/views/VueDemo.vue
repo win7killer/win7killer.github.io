@@ -6,6 +6,9 @@
             <li>
                 <router-link to="/vue_demo/HelloWorld">HelloWorld</router-link>
                 <router-link to="/vue_demo/ColorPicker">ColorPicker</router-link>
+                <router-link to="/vue_demo/CharDeep">CharDeep</router-link>
+                <router-link to="/vue_demo/CodeVideo">CodeVideo</router-link>
+
             </li>
         </ul>
     </div>
@@ -27,12 +30,18 @@
 </template>
 
 <script>
-import HelloWorld from '@/components/HelloWorld.vue';
+import HelloWorld from '@/components/HelloWorld';
 import ColorPicker from '@/components/ColorPicker';
+import CodeVideo from '@/components/CodeVideo';
+import CharDeep from '@/components/CharDeep';
+
 let componentsMap = {
     HelloWorld,
-    ColorPicker
+    ColorPicker,
+    CodeVideo,
+    CharDeep,
 };
+
 export default {
     data() {
         return {
@@ -52,7 +61,7 @@ export default {
         }
     },
     mounted() {
-        console.log(this.components)
+        console.log(this.components);
     },
     components: componentsMap,
     methods: {
@@ -61,13 +70,13 @@ export default {
             this.bg = val.rgb;
         }
     }
-
-}
+};
 </script>
 
 <style lang="less" scoped>
 .vue-demo-list {
     display: flex;
+    min-height: 800px;
 }
 
 .left {

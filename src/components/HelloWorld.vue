@@ -10,9 +10,9 @@ export default {
     data() {
         return {
             msg: '欢迎查看 Vue Demo，选择左侧你要查看的Demo'
-        }
+        };
     }
-}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
