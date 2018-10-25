@@ -2,14 +2,17 @@
 <div class="code-pic-wrap">
     <p>{{showText}}</p>
     <div
+        v-show="false"
         class="J_img_box"
         ref="J_img_box"
     ></div>
-    <div class="can-box">
+    <div
+        class="can-box"
+        v-show="false"
+    >
         <canvas
             id="can"
             ref="can"
-            v-show='false'
             class="can"
             width=200
             height=200
@@ -21,10 +24,10 @@
      id="x"
  >X</div> -->
     <div
-        v-if="false"
+        v-if="true"
         class="char_box"
         :style="{
-            transform: can.width > 10 ? 'scale(.5)' : '',
+            transform: can.width > 10 ? 'scale(0.3)' : '',
             'line-height': lineHeight
         }"
     >
@@ -35,12 +38,12 @@
  ></tt> -->
         <tt v-html="showCode"></tt>
     </div>
-    <pre class="code-box">
+    <!-- <pre class="code-box">
         <textarea :style="{
             zoom: '.5',
             'line-height': lineHeight
         }" name="" id="" cols="120" rows="50" :value="charNode"></textarea>
-    </pre>
+    </pre> -->
 </div>
 </template>
 
@@ -50,14 +53,17 @@ import {
     Stream,
     parseGIF
 } from '@/utils/Stream';
-import { CHAR_CFG } from '../common/utils';
+import {
+    CHAR_CFG,
+    CHAR_DEEP
+} from '../common/utils';
 
 let stream = '1';
 
 export default {
     data() {
         return {
-            fpsLock: 15,
+            fpsLock: 10,
             debug: true,
             can: {},
             ctx: null,
@@ -72,12 +78,12 @@ export default {
             imgList: (() => {
                 let arr = [
                     // import (`@/img/0.gif`)
-                    import (`@/img/77.jpg`)
+                    // import (`@/img/77.jpg`)
 
                 ];
-                // for (let i = 0; i < 14; i++) {
-                //     arr.push(import(`@/img/${i + 1}.png`));
-                // }
+                for (let i = 0; i < 22; i++) {
+                    arr.push(import(`@/img/ff/${i + 1}.png`));
+                }
                 return arr;
             })()
         };
@@ -96,10 +102,20 @@ export default {
         render() {
             this.showCode = this.charPic[this.picIndex];
             // console.log(this.picIndex)
-            if (this.picIndex == 13 || this.picIndex == 0) {
-                this.dir = 0 - this.dir;
+            if (this.backLoop) {
+                if (this.picIndex == 21 || this.picIndex == 0) {
+                    this.dir = 0 - this.dir;
+                }
+                this.picIndex += this.dir;
+            } else {
+                this.dir = 1;
+                if (this.picIndex >= 21) {
+                    this.picIndex = 0;
+
+                }
+                this.picIndex += this.dir;
             }
-            this.picIndex += this.dir;
+
         },
         initCan() {
             this.can = this.$refs.can;
@@ -155,9 +171,9 @@ export default {
             let img = new Image();
             let index = 0;
             img.onload = (res) => {
-                console.log(res);
+                // console.log(res);
                 this.oImg = img;
-                console.log(this.oImg)
+                // console.log(this.oImg)
                 setTimeout(() => {
                     this.drawCan();
                     if (this.imgList[index]) {
@@ -234,16 +250,23 @@ export default {
     box-shadow: 2px 2px 5px #333;
 }
 
-.char_box tt {
-    color: #000;
-    font-size: 14px;
+.char_box {
+    transform-origin: 0 0;
+    transform: scale(.5);
+    tt {
+        color: #000;
+        font-size: 14px;
+
+    }
 }
+
 .code-box {
     position: fixed;
     right: 10px;
     top: 20px;
     background: #f90;
     padding: 20px;
+
     // width: 400px;
     // height: 400px;
     textarea {
@@ -253,6 +276,7 @@ export default {
         transform-origin: 0 0;
     }
 }
+
 .font-radio {
     display: inline-block;
 }

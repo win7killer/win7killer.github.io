@@ -3,12 +3,10 @@
     <div class="left">
         <h3>Demo List</h3>
         <ul class="no-style-list">
-            <li>
-                <router-link to="/vue_demo/HelloWorld">HelloWorld</router-link>
-                <router-link to="/vue_demo/ColorPicker">ColorPicker</router-link>
-                <router-link to="/vue_demo/CharDeep">CharDeep</router-link>
-                <router-link to="/vue_demo/CodeVideo">CodeVideo</router-link>
-
+            <li v-for="(item, index) of componentsMap" :key="index" :class="{
+                cur: componentId === index
+            }">
+                <router-link :to="`/vue_demo/${index}`">{{index}}</router-link>
             </li>
         </ul>
     </div>
@@ -33,12 +31,15 @@
 import HelloWorld from '@/components/HelloWorld';
 import ColorPicker from '@/components/ColorPicker';
 import CodeVideo from '@/components/CodeVideo';
+import CodeGif from '@/components/CodeGif';
+
 import CharDeep from '@/components/CharDeep';
 
 let componentsMap = {
     HelloWorld,
     ColorPicker,
     CodeVideo,
+    CodeGif,
     CharDeep,
 };
 
@@ -49,7 +50,8 @@ export default {
             colorData: {
                 rgb: '',
                 hex: ''
-            }
+            },
+            componentsMap
         };
     },
     computed: {
@@ -74,13 +76,35 @@ export default {
 </script>
 
 <style lang="less" scoped>
+a {
+    text-decoration: none;
+}
 .vue-demo-list {
     display: flex;
     min-height: 800px;
+    .no-style-list {
+        li {
+            width: 100px;
+            // height: 24px;
+            // line-height: 24px;
+            padding: 8px;
+            // background: linear-gradient(to right, rgb(0, 0, 0), rgb(196, 196, 196));
+            background: #333;
+            border-bottom: 1px solid #09f;
+            a {
+                color: #fff;
+            }
+
+        }
+        .cur {
+            background: #09f;
+        }
+    }
 }
 
 .left {
-    width: 200px;
+    // width: 150px;
+    margin-right: 60px;
     float: left;
 }
 

@@ -32,7 +32,7 @@
 
 <script>
 import initAnimate from '@/utils/animation_frame_lock';
-import videoSrc from '@/img/mov.mp4';
+// import videoSrc from '@/img/mov.mp4';
 import vData from './vv.json';
 // let vData = {};
 import { CHAR_CFG, CHAR_DEEP } from '../common/utils';
@@ -48,7 +48,7 @@ export default {
             htmlArr: [],
             textAreaArr: [],
             showArr: [],
-            videoSrc,
+            // videoSrc,
             vData: vData || {},
             charNode: '',
             lineHeight: 1,
@@ -181,6 +181,7 @@ export default {
 .char_box {
     position: relative;
     white-space: nowrap;
+    transform: scale(.5);
     tt {
     color: #000;
     font-size: 14px;

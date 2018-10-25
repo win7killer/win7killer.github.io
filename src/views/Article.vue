@@ -1,6 +1,7 @@
 <template>
 <div class="article">
     <ArticleList></ArticleList>
+    <div ref="ani" class="animate"></div>
 </div>
 </template>
 
@@ -10,6 +11,16 @@ import ArticleList from '@/modules/ArticleList';
 export default {
     data() {
         return {};
+    },
+    mounted() {
+        this.$refs.ani.addEventListener('webkitAnimationStart', e => {
+            console.log(e);
+            console.log('start');
+        });
+        this.$refs.ani.addEventListener('webkitAnimationEnd', e => {
+            console.log(e);
+            console.log('end');
+        });
     },
     components: {
         ArticleList,
@@ -39,5 +50,23 @@ export default {
     height: 10rem;
     background: #000;
 
+}
+
+.animate {
+    animation: aniframe 3s linear 1s infinite;
+    background: #09f;
+    height: 100px;
+}
+
+@keyframes aniframe {
+    0% {
+        width: 100px;
+    }
+    50% {
+        width: 400px;
+    }
+    100% {
+        width: 100px;
+    }
 }
 </style>

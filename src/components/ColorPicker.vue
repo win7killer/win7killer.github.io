@@ -1,5 +1,5 @@
 <template>
-<div class="vc-color-picker-wrapper clearfix layout">
+<div class="vc-color-picker-wrapper clearfix">
     <div class="color-bar"
         @mousedown="msDown"
         @mousemove="msMove(getPosBar, $event)"
@@ -145,7 +145,7 @@ export default {
 <style lang="less">
 .vc-color-picker-wrapper {
     margin-left: 100px;
-    width: auto;
+    width: 400px;
     position: relative;
     padding: 20px;
     .color-bar,
