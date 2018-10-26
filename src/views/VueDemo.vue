@@ -32,6 +32,8 @@ import HelloWorld from '@/components/HelloWorld';
 import ColorPicker from '@/components/ColorPicker';
 import CodeVideo from '@/components/CodeVideo';
 import CodeGif from '@/components/CodeGif';
+import CodePic from '@/components/CodePic';
+
 
 import CharDeep from '@/components/CharDeep';
 
@@ -40,6 +42,7 @@ let componentsMap = {
     ColorPicker,
     CodeVideo,
     CodeGif,
+    CodePic,
     CharDeep,
 };
 
@@ -75,7 +78,18 @@ export default {
 };
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
+
+.char_box {
+    transform-origin: 0 0;
+    transform: scale(.5);
+    tt {
+        color: #000;
+        font-size: 14px;
+
+    }
+}
+
 a {
     text-decoration: none;
 }

@@ -20,22 +20,22 @@ export default {
         return {
             infoList: [{
                 title: 'Nickname',
-                value: '😀 fe_bean | win7killer'
+                value: 'fe_bean | win7killer'
             }, {
                 title: 'Sex',
-                value: '🚹 male'
+                value: 'male'
             }, {
                 title: 'Profession',
-                value: '👨‍💻‍ FE-developer'
+                value: 'FE-developer'
             }, {
                 title: 'Area',
-                value: '🌏 Asia'
+                value: 'Asia'
             }, {
                 title: 'Country',
-                value: '🇨🇳 China'
+                value: 'China'
             }, {
                 title: 'E-mail',
-                value: '📧 win7killer@163.com'
+                value: 'win7killer@163.com'
             }],
         };
     },

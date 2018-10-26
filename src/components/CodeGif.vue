@@ -59,11 +59,13 @@ import {
 } from '../common/utils';
 
 let stream = '1';
+const picNum = 14;
 
 export default {
     data() {
         return {
             fpsLock: 10,
+            picNum,
             debug: true,
             can: {},
             ctx: null,
@@ -75,15 +77,18 @@ export default {
             dir: -1,
             showText: '',
             showCode: '',
+            backLoop: true,
             imgList: (() => {
                 let arr = [
                     // import (`@/img/0.gif`)
                     // import (`@/img/77.jpg`)
 
                 ];
-                for (let i = 0; i < 22; i++) {
-                    arr.push(import(`@/img/ff/${i + 1}.png`));
+                console.log(picNum)
+                for (let i = 0; i < picNum; i++) {
+                    arr.push(import(`@/img/${i + 1}.png`));
                 }
+                console.log(arr);
                 return arr;
             })()
         };
@@ -103,13 +108,13 @@ export default {
             this.showCode = this.charPic[this.picIndex];
             // console.log(this.picIndex)
             if (this.backLoop) {
-                if (this.picIndex == 21 || this.picIndex == 0) {
+                if (this.picIndex == this.picNum - 1 || this.picIndex == 0) {
                     this.dir = 0 - this.dir;
                 }
                 this.picIndex += this.dir;
             } else {
                 this.dir = 1;
-                if (this.picIndex >= 21) {
+                if (this.picIndex >= this.picNum - 1 ) {
                     this.picIndex = 0;
 
                 }

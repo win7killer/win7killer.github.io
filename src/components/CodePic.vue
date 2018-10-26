@@ -2,14 +2,15 @@
 <div class="code-pic-wrap">
     <p>{{showText}}</p>
     <div
+        v-show="false"
         class="J_img_box"
         ref="J_img_box"
     ></div>
-    <div class="can-box">
+    <div class="can-box" v-show="false">
         <canvas
             id="can"
             ref="can"
-            v-show='false'
+
             class="can"
             width=200
             height=200
@@ -23,7 +24,7 @@
     <div
         class="char_box"
         :style="{
-            transform: can.width > 10 ? 'scale(1)' : '',
+            transform: can.width > 10 ? 'scale(.5)' : '',
             'line-height': lineHeight
         }"
     >
@@ -116,12 +117,11 @@ export default {
             showChar: '',
             imgList: (() => {
                 let arr = [
-                    // import (`@/img/1.png`)
-
+                    import (`@/img/heben.png`),
                 ];
-                for (let i = 0; i < 14; i++) {
-                    arr.push(import(`@/img/${i + 1}.png`));
-                }
+                // for (let i = 0; i < 14; i++) {
+                //     arr.push(import(`@/img/${i + 1}.png`));
+                // }
                 return arr;
             })()
         };
