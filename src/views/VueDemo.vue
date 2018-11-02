@@ -33,9 +33,9 @@ import ColorPicker from '@/components/ColorPicker';
 import CodeVideo from '@/components/CodeVideo';
 import CodeGif from '@/components/CodeGif';
 import CodePic from '@/components/CodePic';
-
-
+import WaveCan from '@/components/WaveCan';
 import CharDeep from '@/components/CharDeep';
+
 
 let componentsMap = {
     HelloWorld,
@@ -44,6 +44,7 @@ let componentsMap = {
     CodeGif,
     CodePic,
     CharDeep,
+    // WaveCan,
 };
 
 export default {
