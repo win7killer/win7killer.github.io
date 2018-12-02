@@ -1,5 +1,5 @@
 <template>
-<div id="app" :class="['app', `app-${$route.name.toLowerCase()}`]">
+<div id="app" :class="['app', `app-${routerName.toLowerCase()}`]">
     <Header bgColor="#333">
         <Nav bgColor="#333" :routerName="routerName"></Nav>
     </Header>
@@ -33,7 +33,7 @@ export default {
             return this.cWidth >= 1000 ? this.cWidth : 1000;
         },
         routerName() {
-            return this.$route.name;
+            return this.$route.name || '';
         },
         appLayoutHeight() {
             console.log(this.cHeight);
