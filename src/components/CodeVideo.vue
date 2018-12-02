@@ -2,12 +2,12 @@
 <div class="code-pic-wrap">
     <p>{{showText}}</p>
     <div class="can-box">
-        <!-- <canvas
+        <canvas
             id="can"
             v-show="false"
             ref="can"
             class="can"
-        ></canvas> -->
+        ></canvas>
         <!-- <video
             crossorigin
             v-show="false"
@@ -33,7 +33,7 @@
 <script>
 import initAnimate from '@/utils/animation_frame_lock';
 // import videoSrc from '@/img/mov.mp4';
-const vData = import('./vv.json');
+import vData from './vv.json';
 // let vData = {};
 import { CHAR_CFG, CHAR_DEEP } from '../common/utils';
 let charMap = CHAR_DEEP || {};
