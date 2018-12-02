@@ -28,13 +28,13 @@
 </template>
 
 <script>
-import HelloWorld from '@/components/HelloWorld';
-import ColorPicker from '@/components/ColorPicker';
-import CodeVideo from '@/components/CodeVideo';
-import CodeGif from '@/components/CodeGif';
-import CodePic from '@/components/CodePic';
-import WaveCan from '@/components/WaveCan';
-import CharDeep from '@/components/CharDeep';
+const HelloWorld = import('@/components/HelloWorld');
+const ColorPicker = import('@/components/ColorPicker');
+const CodeVideo = import('@/components/CodeVideo');
+const CodeGif = import('@/components/CodeGif');
+const CodePic = import('@/components/CodePic');
+const WaveCan = import('@/components/WaveCan');
+const CharDeep = import('@/components/CharDeep');
 
 
 let componentsMap = {

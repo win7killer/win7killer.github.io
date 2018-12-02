@@ -33,7 +33,7 @@
 <script>
 import initAnimate from '@/utils/animation_frame_lock';
 // import videoSrc from '@/img/mov.mp4';
-import vData from './vv.json';
+const vData = import('./vv.json');
 // let vData = {};
 import { CHAR_CFG, CHAR_DEEP } from '../common/utils';
 let charMap = CHAR_DEEP || {};
