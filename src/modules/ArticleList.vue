@@ -69,15 +69,17 @@ export default {
             animation: show 3s infinite linear;
         }
     }
+
+    a:active, a:link, a:visited, a:hover {
+        color: #09f;
+    }
 }
 
 .article-title {
     color: #09f;
     text-shadow: 3px 3px 4px #ccc;
     font-size: 20px;
-    .a:active, .a:link, .a:visited, .a:hover {
-        color: #09f;
-    }
+
 }
 
 .article-info {

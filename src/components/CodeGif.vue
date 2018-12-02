@@ -86,7 +86,7 @@ export default {
                 ];
                 console.log(picNum)
                 for (let i = 0; i < picNum; i++) {
-                    arr.push(import(`@/img/${i + 1}.png`));
+                    arr.push(import(/* webpackChunkName: "img_group" */ `@/img/${i + 1}.png`));
                 }
                 console.log(arr);
                 return arr;
