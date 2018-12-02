@@ -13,14 +13,14 @@ export default {
         return {};
     },
     mounted() {
-        this.$refs.ani.addEventListener('webkitAnimationStart', e => {
-            console.log(e);
-            console.log('start');
-        });
-        this.$refs.ani.addEventListener('webkitAnimationEnd', e => {
-            console.log(e);
-            console.log('end');
-        });
+        // this.$refs.ani.addEventListener('webkitAnimationStart', e => {
+        //     console.log(e);
+        //     console.log('start');
+        // });
+        // this.$refs.ani.addEventListener('webkitAnimationEnd', e => {
+        //     console.log(e);
+        //     console.log('end');
+        // });
     },
     components: {
         ArticleList,
