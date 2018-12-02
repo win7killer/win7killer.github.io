@@ -1,7 +1,7 @@
 <template>
 <div class="article">
     <ArticleList></ArticleList>
-    <div ref="ani" class="animate"></div>
+    <!-- <div ref="ani" class="animate"></div> -->
 </div>
 </template>
 

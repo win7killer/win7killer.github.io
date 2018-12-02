@@ -7,6 +7,7 @@
 const fs = require('fs');
 const path = require('path');
 const SRC = path.resolve(__dirname, '../src');
+const DOCSRC = path.resolve(__dirname, '../docs/');
 const mapPath = path.resolve(SRC, 'docMap.json');
 let files = {};
 
@@ -33,8 +34,8 @@ let getAllFiles = function (src, rule) {
 
 function getMdEntry() {
     let paths = [{
-        path: path.resolve(SRC, 'docs'),
-        rule: /\/src\/(docs\/.*)\.md$/
+        path: DOCSRC,
+        rule: /\/(docs\/.*)\.md$/
     }];
     files = {};
     paths.forEach(function (obj) {
@@ -78,8 +79,8 @@ let methods = {
                         size: stat.size,
                         stat,
                         summary: conStat.summary,
-                        content: conStat.content,
-                        source: content,
+                        // content: conStat.content,
+                        // source: content,
                         tag: '',
                         type: ''
                     });
@@ -94,7 +95,7 @@ let methods = {
     },
     makeJson(map = {}) {
         let confStr = JSON.stringify(map, null, 2);
-        // console.log(confStr);
+        console.log(33);
         fs.writeFileSync(mapPath, confStr);
     },
 };
