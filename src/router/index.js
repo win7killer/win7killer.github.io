@@ -3,6 +3,7 @@ import Router from 'vue-router';
 const Main = () => import('@/views/Main');
 const VueDemo = () => import('@/views/VueDemo.vue');
 const Article = () => import('@/views/Article.vue');
+const Demo = () => import('@/views/Demo.vue');
 
 Vue.use(Router);
 
@@ -19,5 +20,9 @@ export default new Router({
         path: '/vue_demo/:id',
         name: 'VueDemo',
         component: VueDemo
+    }, {
+        path: '/demo',
+        name: 'demo',
+        component: Demo
     }]
 });
