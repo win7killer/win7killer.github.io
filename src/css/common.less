@@ -2,7 +2,7 @@
 @import "./vars.less";
 @import "./mixin.less";
 @import "./theme.less";
-
+@import "./font";
 body {
     font-size: .14rem;
     background-color: @theme-bg-color;
@@ -16,17 +16,7 @@ button {
 .header {
     background-color: @theme-bg-color;
 }
-.footer {
-    color: @theme-text-color;
-    background: @theme-bg-color;
-    text-align: center;
-    border-top: solid 1px #e6e6e6;
-    padding: .2rem 0;
-    box-sizing: border-box;
-    .layout {
-        box-sizing: border-box;
-    }
-}
+
 .layout {
     .layout();
     min-width: 800px;
