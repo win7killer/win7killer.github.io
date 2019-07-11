@@ -6,7 +6,7 @@
             <li v-for="(item, index) of componentsMap" :key="index" :class="{
                 cur: componentId === index
             }">
-                <router-link :to="`/vue_demo/${index}`">{{index}}</router-link>
+                <router-link class="demo-nav-item" :to="`/vue_demo/${index}`">{{index}}</router-link>
             </li>
         </ul>
     </div>
@@ -33,9 +33,7 @@ const ColorPicker = () => import('@/components/ColorPicker');
 const CodeVideo = () => import('@/components/CodeVideo');
 const CodeGif = () => import('@/components/CodeGif');
 const CodePic = () => import('@/components/CodePic');
-const WaveCan = () => import('@/components/WaveCan');
 const CharDeep = () => import('@/components/CharDeep');
-
 
 let componentsMap = {
     HelloWorld,
@@ -44,7 +42,6 @@ let componentsMap = {
     CodeGif,
     CodePic,
     CharDeep,
-    // WaveCan,
 };
 
 export default {
@@ -97,6 +94,7 @@ a {
 .vue-demo-list {
     display: flex;
     min-height: 800px;
+    @background: #333;
     .no-style-list {
         li {
             width: 100px;
@@ -109,6 +107,12 @@ a {
             a {
                 color: #fff;
             }
+            &:hover {
+                background: lighten(#09f, 10%);
+            }
+        }
+        .demo-nav-item {
+            display: block;
 
         }
         .cur {

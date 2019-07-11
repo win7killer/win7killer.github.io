@@ -1,22 +1,21 @@
 <template>
 <div id="app" :class="['app', `app-${routerName.toLowerCase()}`]">
     <Header bgColor="#333">
-        <Nav bgColor="#333" :routerName="routerName"></Nav>
+        <Nav bgColor="#333" :routerName="routerName"/>
     </Header>
     <div class="layout" :style="{
         height: $route.name === 'Main' ? `${appLayoutHeight}` : 'auto'
     }">
         <router-view/>
     </div>
-    <Footer></Footer>
-
+    <Footer/>
 </div>
 </template>
 
 <script>
-import Header from '@/modules/common/Header';
-
-import Nav from '@/modules/common/Nav';
+import Header from '@/components/Header';
+import Nav from '@/components/Nav';
+import Footer from './components/Footer';
 export default {
     name: 'App',
     data() {
@@ -47,6 +46,7 @@ export default {
     components: {
         Nav,
         Header,
+        Footer,
     },
     methods: {
         bindEvn() {

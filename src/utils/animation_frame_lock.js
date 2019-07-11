@@ -12,7 +12,10 @@ function initAnimate(loop = () => {}, opt = {
     let {
         fpsLock,
         debug
-    } = opt;
+    } = {
+        fpsLock: 60,
+        ...opt
+    };
     let timeCounter = 0;
     let isActiveDocument = true;
     let mSpf = +(1000 / fpsLock).toFixed(2); // ms per frame

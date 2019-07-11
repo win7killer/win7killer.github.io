@@ -1,41 +1,14 @@
 <template>
 <div class="code-pic-wrap">
     <p>{{showText}}</p>
-    <div
-        v-show="false"
-        class="J_img_box"
-        ref="J_img_box"
-    ></div>
-    <div
-        class="can-box"
-        v-show="false"
-    >
-        <canvas
-            id="can"
-            ref="can"
-            class="can"
-            width=200
-            height=200
-        ></canvas>
+    <div v-show="false" class="J_img_box" ref="J_img_box"></div>
+    <div class="can-box" v-show="false">
+        <canvas id="can" ref="can" class="can" width=200 height=200></canvas>
     </div>
-    <!-- <hr> -->
-    <!-- <div
-     class="font-radio"
-     id="x"
- >X</div> -->
-    <div
-        v-if="true"
-        class="char_box"
-        :style="{
-            transform: can.width > 10 ? 'scale(0.3)' : '',
+    <div v-if="true" class="char_box" :style="{
             'line-height': lineHeight
-        }"
-    >
-        <!-- <tt
-     v-for="(item, index) in charPic"
-     :key="index"
-     v-html="item"
- ></tt> -->
+        }">
+        <tt v-for="(item, index) in charPic" :key="index" v-html="item"></tt>
         <tt v-html="showCode"></tt>
     </div>
     <!-- <pre class="code-box">
@@ -57,12 +30,28 @@ import {
     CHAR_CFG,
     CHAR_DEEP
 } from '../common/utils';
+import img1 from '@/img/1.png';
+import img2 from '@/img/2.png';
+import img3 from '@/img/3.png';
+import img4 from '@/img/4.png';
+import img5 from '@/img/5.png';
+import img6 from '@/img/6.png';
+import img7 from '@/img/7.png';
+import img8 from '@/img/8.png';
+import img9 from '@/img/9.png';
+import img10 from '@/img/10.png';
+import img11 from '@/img/11.png';
+import img12 from '@/img/12.png';
+import img13 from '@/img/13.png';
+import img14 from '@/img/14.png';
 
 let stream = '1';
 const picNum = 14;
+const space_node = '·';
+CHAR_CFG['0'] = space_node;
 
 export default {
-    data() {
+    data () {
         return {
             fpsLock: 10,
             picNum,
@@ -78,35 +67,21 @@ export default {
             showText: '',
             showCode: '',
             backLoop: true,
-            imgList: (() => {
-                let arr = [
-                    // import (`@/img/0.gif`)
-                    // import (`@/img/77.jpg`)
-
-                ];
-                console.log(picNum)
-                for (let i = 0; i < picNum; i++) {
-                    arr.push(import(/* webpackChunkName: "img_group" */ `@/img/${i + 1}.png`));
-                }
-                console.log(arr);
-                return arr;
-            })()
+            imgList: [img1, img2, img3, img4, img5, img6, img7, img8, img9, img10, img11, img12, img13, img14,]
         };
     },
-    mounted() {
+    mounted () {
         this.initCan();
         this.loadImg();
-        // this.getGifSteam();
     },
     methods: {
-        loop(opts) {
-            let fpsText = this.debug ? `FPS: ${opts.fps} --- ` : '';
-            this.showText = `${fpsText}KeepTime: ${Math.floor(opts.timeCounter / 1000)} s`;
+        loop (opts) {
+            let fpsText = this.debug ? `FPS: ${opts.fps}` : '';
+            this.showText = `${fpsText}`;
             this.render(opts.timeCounter / 1000);
         },
-        render() {
+        render () {
             this.showCode = this.charPic[this.picIndex];
-            // console.log(this.picIndex)
             if (this.backLoop) {
                 if (this.picIndex == this.picNum - 1 || this.picIndex == 0) {
                     this.dir = 0 - this.dir;
@@ -114,127 +89,60 @@ export default {
                 this.picIndex += this.dir;
             } else {
                 this.dir = 1;
-                if (this.picIndex >= this.picNum - 1 ) {
+                if (this.picIndex >= this.picNum - 1) {
                     this.picIndex = 0;
-
                 }
                 this.picIndex += this.dir;
             }
-
         },
-        initCan() {
+        initCan () {
             this.can = this.$refs.can;
             this.ctx = this.can.getContext('2d');
         },
-        // doParse() {
-        //     console.log(222)
-        //     var handler = {
-        //         hdr(dd) {console.log(dd)},
-        //         // gce(dd) {console.log(dd)},
-        //         com(dd) {console.log(dd)},
-        //         // app: {
-        //         //     // TODO: Is there much point in actually supporting iterations?
-        //         //     NETSCAPE: withProgress(doNothing)
-        //         // },
-        //         img(dd) {console.log(dd)},
-        //         eof: function (block) {
-        //             //toolbar.style.display = '';
-        //             // pushFrame();
-        //             // doDecodeProgress(false);
-        //             // doText('Playing...');
-        //             // doPlay();
-        //             console.log(block);
-        //         }
-        //     };
-        //     parseGIF(stream, handler);
-        //     window.gifData = handler;
-        //     console.log(handler);
-        //     // console.log(stream);
-        // },
-        // getGifSteam() {
-        //     var h = new XMLHttpRequest();
-        //     h.overrideMimeType('text/plain; charset=x-user-defined');
-        //     h.onload = e => {
-        //         //doLoadProgress(e);
-        //         console.log(e);
-        //         // TODO: In IE, might be able to use h.responseBody instead of overrideMimeType.
-        //         stream = new Stream(h.responseText);
-        //         setTimeout(this.doParse, 0);
-        //         console.log(h.responseText.substring(0, 100))
-        //     };
-        //     // h.onprogress = doLoadProgress;
-        //     h.onerror = function () {
-        //         console.log(111)
-        //     };
-        //     this.imgList[0].then((res) => {
-        //         h.open('GET', res, true);
-        //         h.send();
-        //     })
-
-        // },
-        loadImg() {
-            let img = new Image();
-            let index = 0;
-            img.onload = (res) => {
-                // console.log(res);
-                this.oImg = img;
-                // console.log(this.oImg)
-                setTimeout(() => {
-                    this.drawCan();
-                    if (this.imgList[index]) {
-                        load.call(this);
-                    } else {
-                        if (this.charPic.length > 1) {
-                            initAnimate(this.loop, {
-                                fpsLock: this.fpsLock,
-                                debug: this.debug
-                            });
-                        } else {
-                            this.showCode = this.charPic[0];
-                        }
-                    }
-                }, 50);
-
-            };
-            load.call(this);
-
-            function load() {
-                this.imgList[index++].then((res) => {
-                    // console.log(res);
-                    img.src = res;
+        loadImg () {
+            Promise.all(this.imgList)
+                .then(res => {
+                    res.forEach(item => {
+                        let img = new Image();
+                        img.src = item;
+                        img.onload = res => {
+                            this.drawCan(img);
+                        };
+                    });
+                    initAnimate(this.loop, {
+                        fpsLock: this.fpsLock,
+                        debug: this.debug
+                    });
                 });
-            }
         },
-        drawCan() {
+        drawCan (oImg) {
             let {
                 can,
                 ctx,
-                oImg,
             } = this;
-            // let oImg = this.$refs.J_img_box.getElementsByTagName('img')[0];
             can.width = oImg.width > 100 ? 100 : oImg.width;
             can.height = can.width * 0.63 / this.lineHeight;
             ctx.drawImage(oImg, 0, 0, oImg.width, oImg.height, 0, 0, can.width, can.height);
             let imgData = ctx.getImageData(0, 0, can.width, can.height);
             this.takeCharPic(imgData);
         },
-        takeCharPic(imgData) {
+        takeCharPic (imgData) {
             let pos = [];
             for (let i = 0, data = imgData.data, l = data.length; i < l; i += 4) {
                 if (data[i + 3] !== 0) {
                     let tempText = this.getText((data[i] + data[i + 1] + data[i + 2]) / 3);
                     pos[i] = tempText;
                 } else {
-                    pos[i] = '·';
+                    pos[i] = space_node;
                 }
                 if (Math.floor(i / 4) % imgData.width === imgData.width - 1) {
-                    pos[i] = '·\n';
+                    pos[i] = `${space_node}\n`;
                 }
             }
             this.charNode = pos.join('');
             this.charPic.push(this.charNode.replace(/\n/g, '</br>'));
         },
-        getText(num) {
+        getText (num) {
             num = 255 - num;
             let temp = '';
             for (let k in CHAR_CFG) {
@@ -256,12 +164,14 @@ export default {
 }
 
 .char_box {
+    width: 250%;
     transform-origin: 0 0;
-    transform: scale(.5);
+    transform: scale(0.5);
+
     tt {
         color: #000;
-        font-size: 14px;
-
+        font-size: 12px;
+        float: left;
     }
 }
 
@@ -272,10 +182,7 @@ export default {
     background: #f90;
     padding: 20px;
 
-    // width: 400px;
-    // height: 400px;
     textarea {
-        // position: absolute;
         top: 0;
         left: 0;
         transform-origin: 0 0;

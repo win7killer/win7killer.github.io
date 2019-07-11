@@ -181,7 +181,7 @@ export default {
 .char_box {
     position: relative;
     white-space: nowrap;
-    transform: scale(.5);
+    transform: scale(0.7);
     tt {
     color: #000;
     font-size: 14px;
