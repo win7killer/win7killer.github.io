@@ -1,7 +1,0 @@
-/build/
-/config/
-/dist/
-/*.js
-/src/libs/
-/src/utils/
-/node_modules/
