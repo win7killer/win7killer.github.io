@@ -34,6 +34,7 @@ const CodeVideo = () => import('@/components/CodeVideo');
 const CodeGif = () => import('@/components/CodeGif');
 const CodePic = () => import('@/components/CodePic');
 const CharDeep = () => import('@/components/CharDeep');
+const IconAnimate = () => import('@/components/Icon');
 
 let componentsMap = {
     HelloWorld,
@@ -42,6 +43,7 @@ let componentsMap = {
     CodeGif,
     CodePic,
     CharDeep,
+    IconAnimate,
 };
 
 export default {
