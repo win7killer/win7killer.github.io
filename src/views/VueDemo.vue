@@ -35,6 +35,7 @@ const CodeGif = () => import('@/components/CodeGif');
 const CodePic = () => import('@/components/CodePic');
 const CharDeep = () => import('@/components/CharDeep');
 const IconAnimate = () => import('@/components/Icon');
+const CricleProcess = () => import('@/components/Process');
 
 let componentsMap = {
     HelloWorld,
@@ -44,6 +45,7 @@ let componentsMap = {
     CodePic,
     CharDeep,
     IconAnimate,
+    CricleProcess,
 };
 
 export default {
@@ -59,11 +61,12 @@ export default {
     },
     computed: {
         componentId() {
-            return this.$route.params.id;
+            let id = this.$route.params.id;
+            if (!componentsMap[id]) {
+                return this.$router.replace('/')
+            }
+            return  id;;
         },
-        getId() {
-            return this.$route.params.id;
-        }
     },
     mounted() {
         console.log(this.components);

@@ -52,7 +52,7 @@ export default {
     computed: {
         activeIndex() {
             for (let i = 0, l = this.navList.length; i < l; i++) {
-                if (this.navList[i].link === window.location.hash.replace('#', '')) {
+                if (this.navList[i].link === this.$route.path) {
                     return i + '';
                 }
             }
